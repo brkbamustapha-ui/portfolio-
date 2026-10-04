@@ -179,7 +179,7 @@
 
   /* Formulaire -> ouvre le client mail (à remplacer par Formspree/Supabase si besoin) */
   const form = $('#form'), status = $('#formStatus');
-  const TO = 'contact@votre-site.com';
+  const TO = 'brkbamustapha@gmail.com';
   form.addEventListener('submit', e => {
     e.preventDefault();
     const d = Object.fromEntries(new FormData(form));
