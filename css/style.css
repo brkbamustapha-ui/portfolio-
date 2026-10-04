@@ -138,6 +138,12 @@ main,.footer,.nav{position:relative;z-index:2}
 .project__meta span{font:500 .75rem var(--ff-h);letter-spacing:.14em;text-transform:uppercase;color:var(--c1)}
 .project__meta h3{font:700 1.5rem var(--ff-h);margin:.3rem 0}
 .project__meta p{color:var(--muted);font-size:.95rem}
+.project__live::after{content:"";position:absolute;inset:0;z-index:1}
+.project__live em{font-style:normal;color:var(--c1);display:inline-block;transition:transform .3s}
+.project:hover .project__live em{transform:translate(3px,-3px)}
+.project{position:relative}
+.project__gh{position:relative;z-index:2;display:inline-block;margin-top:.9rem;font-size:.85rem;color:var(--c1);transition:color .3s}
+.project__gh:hover{color:var(--fg);text-decoration:underline}
 
 /* Skills */
 .skills{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem 3rem;margin-bottom:3rem}
