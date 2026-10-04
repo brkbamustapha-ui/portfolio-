@@ -172,7 +172,7 @@
   addEventListener('scroll', updateScroll, { passive: true });
 
   /* Trajectoire du blob selon la progression (x, y, échelle) */
-  const pathDesktop = [[2.4, 0, 1], [-3.3, 0, .8], [3.4, -.2, .8], [-3.4, 0, .8], [3.3, 0, .8], [0, 0, 1.15]];
+  const pathDesktop = [[2.4, 0, 1], [4.3, 0.3, .7], [-4.3, 0, .7], [4.3, 0, .7], [-4.3, 0, .7], [0, 0, 1.15]];
   const pathMobile  = [[0, -3.1, .62], [0, 2.8, .5], [0, 2.8, .5], [0, 2.8, .5], [0, 2.8, .5], [0, 1.2, .8]];
   const lerp = (a, b, t) => a + (b - a) * t;
   const sample = (path, p) => {
@@ -194,7 +194,11 @@
 
   /* ---------- Boucle ---------- */
   const clock = new THREE.Clock();
-  let running = true, last = 0;
+  let running = true, last = 0, introStart = -1, pulse = 0;
+  const damp = (lambda, dt) => 1 - Math.exp(-lambda * dt);
+  const easeOutBack = x => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+  document.addEventListener('app:ready', () => { introStart = clock.getElapsedTime(); });
+  addEventListener('pointerdown', () => { pulse = 1; }, { passive: true });
   document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) loop(); });
 
   function loop() {
@@ -202,23 +206,26 @@
     requestAnimationFrame(loop);
     const t = clock.getElapsedTime(), dt = Math.min(0.05, t - last); last = t;
 
-    mouse.x += (mouse.tx - mouse.x) * 0.06;
-    mouse.y += (mouse.ty - mouse.y) * 0.06;
+    const kM = damp(4, dt), kS = damp(5, dt);
+    mouse.x += (mouse.tx - mouse.x) * kM;
+    mouse.y += (mouse.ty - mouse.y) * kM;
     const prev = scrollSmooth;
-    scrollSmooth += (scrollP - scrollSmooth) * 0.06;
-    scrollVel += ((scrollSmooth - prev) * 90 - scrollVel) * 0.1;
+    scrollSmooth += (scrollP - scrollSmooth) * kS;
+    scrollVel += ((dt ? (scrollSmooth - prev) / dt / 60 * 1.5 : 0) - scrollVel) * damp(6, dt);
+    pulse *= Math.exp(-dt * 2.2);
+    const intro = introStart < 0 ? 0 : easeOutBack(Math.min(1, (t - introStart) / 1.8));
 
     const path = (innerWidth <= 820) ? pathMobile : pathDesktop;
     const [px, py, sc] = sample(path, scrollSmooth);
     hero.position.set(px, py, 0);
-    hero.scale.setScalar(sc * (1 + Math.abs(scrollVel) * 0.12));
+    hero.scale.setScalar(Math.max(0.0001, sc * intro * (1 + Math.min(.25, Math.abs(scrollVel) * 0.12) + pulse * 0.08)));
 
     blobMat.uniforms.uTime.value = reduce ? 0 : t;
-    blobMat.uniforms.uAmp.value = 0.3 + Math.min(0.5, Math.abs(scrollVel) * 0.5) + Math.abs(mouse.x * mouse.y) * 0.2;
+    blobMat.uniforms.uAmp.value = 0.3 + Math.min(0.5, Math.abs(scrollVel) * 0.5) + Math.abs(mouse.x * mouse.y) * 0.2 + pulse * 0.45;
     blobMat.uniforms.uMouse.value.set(mouse.x, mouse.y);
 
     if (!reduce) {
-      hero.rotation.y = t * 0.12 + mouse.x * 0.5 + scrollSmooth * 6;
+      hero.rotation.y = t * 0.12 + mouse.x * 0.5 + scrollSmooth * 6 + (1 - intro) * 3;
       hero.rotation.x = mouse.y * 0.3;
       shell.rotation.y = -t * 0.08; shell.rotation.x = t * 0.05;
       rings.children.forEach((r, i) => { r.rotation.z = t * (0.15 + i * 0.07) * (i % 2 ? -1 : 1); });
@@ -232,8 +239,9 @@
     }
 
     /* Caméra : parallaxe + dérive au scroll */
-    camera.position.x += ((mouse.x * 0.8) - camera.position.x) * 0.05;
-    camera.position.y += ((mouse.y * 0.5 - scrollSmooth * 1.2) - camera.position.y) * 0.05;
+    const kC = damp(3, dt);
+    camera.position.x += ((mouse.x * 0.8) - camera.position.x) * kC;
+    camera.position.y += ((mouse.y * 0.5 - scrollSmooth * 1.2) - camera.position.y) * kC;
     camera.lookAt(0, -scrollSmooth * 0.8, 0);
 
     /* Couleurs interpolées par section */
@@ -247,8 +255,6 @@
     renderer.render(scene, camera);
   }
 
-  /* Intro : zoom d'entrée */
-  hero.scale.setScalar(0.01);
   loop();
   window.Scene3D = { ready: Promise.resolve() };
 })();
