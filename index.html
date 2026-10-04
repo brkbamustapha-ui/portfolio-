@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Votre Nom — Développeur Web 3D & Créateur de sites</title>
+<meta name="description" content="Développeur web freelance : je crée tous types de sites pour tous types de business — vitrines, e-commerce, applications — avec animations 3D, rapides et responsive.">
+<meta name="theme-color" content="#07060d">
+<meta property="og:title" content="Votre Nom — Développeur Web 3D">
+<meta property="og:description" content="Des sites web immersifs, animés en 3D, pour n'importe quel business.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236ee7ff'/%3E%3Cstop offset='1' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 4 58 18v28L32 60 6 46V18z' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Loader -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__cube"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <p class="loader__txt"><span id="loaderPct">0</span>%</p>
+</div>
+
+<!-- 3D background -->
+<canvas id="bg3d" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- Header -->
+<header class="nav" id="nav">
+  <a href="#accueil" class="logo" aria-label="Accueil">
+    <span class="logo__mark"></span><span>VOTRE<b>NOM</b></span>
+  </a>
+  <nav class="nav__links" id="navLinks" aria-label="Navigation principale">
+    <a href="#services">Services</a>
+    <a href="#projets">Projets</a>
+    <a href="#competences">Compétences</a>
+    <a href="#process">Méthode</a>
+    <a href="#contact" class="btn btn--small magnetic">Me contacter</a>
+  </nav>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span></button>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="accueil" data-section="0">
+  <div class="wrap hero__inner">
+    <p class="eyebrow reveal"><span class="dot"></span> Disponible pour de nouveaux projets</p>
+    <h1 class="hero__title">
+      <span class="line"><span class="reveal-line">Je crée des sites</span></span>
+      <span class="line"><span class="reveal-line grad">qui prennent vie</span></span>
+      <span class="line"><span class="reveal-line">en <em>3D.</em></span></span>
+    </h1>
+    <p class="hero__lead reveal">
+      Développeur web : sites vitrines, e-commerce, applications, landing pages…
+      Pour <span id="typed" class="typed"></span><span class="caret">|</span>
+    </p>
+    <div class="hero__cta reveal">
+      <a href="#projets" class="btn btn--primary magnetic">Voir mes projets <span class="arrow">→</span></a>
+      <a href="#contact" class="btn btn--ghost magnetic">Démarrer un projet</a>
+    </div>
+    <ul class="stats reveal">
+      <li><b data-count="50" data-suffix="+">0</b><span>Sites livrés</span></li>
+      <li><b data-count="100" data-suffix="%">0</b><span>Responsive</span></li>
+      <li><b data-count="98" data-suffix="">0</b><span>Score Lighthouse</span></li>
+    </ul>
+  </div>
+  <a href="#services" class="scroll-hint" aria-label="Défiler"><span></span></a>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Restaurants</span><span>E-commerce</span><span>Immobilier</span><span>Santé</span><span>Beauté & Coiffure</span><span>Startups</span><span>Écoles</span><span>Artisans</span><span>Agences</span><span>Associations</span>
+    <span>Restaurants</span><span>E-commerce</span><span>Immobilier</span><span>Santé</span><span>Beauté & Coiffure</span><span>Startups</span><span>Écoles</span><span>Artisans</span><span>Agences</span><span>Associations</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services" data-section="1">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <p class="eyebrow">01 — Services</p>
+      <h2>Un site <span class="grad">sur-mesure</span> pour chaque business</h2>
+      <p class="muted">Quel que soit votre secteur, je conçois et développe le site qui vous ressemble et qui convertit.</p>
+    </header>
+    <div class="grid grid--3">
+      <article class="card tilt reveal">
+        <div class="card__icon">◈</div>
+        <h3>Sites vitrines</h3>
+        <p>Une présence en ligne élégante et rapide pour présenter votre activité, vos services et vos coordonnées.</p>
+        <ul class="tags"><li>SEO</li><li>Rapide</li><li>Sur-mesure</li></ul>
+      </article>
+      <article class="card tilt reveal">
+        <div class="card__icon">◉</div>
+        <h3>E-commerce</h3>
+        <p>Boutiques en ligne complètes : catalogue, panier, paiement sécurisé, gestion des commandes.</p>
+        <ul class="tags"><li>Paiement</li><li>Stock</li><li>Conversion</li></ul>
+      </article>
+      <article class="card tilt reveal">
+        <div class="card__icon">⬡</div>
+        <h3>Expériences 3D</h3>
+        <p>Animations 3D, WebGL et interactions immersives pour marquer les esprits dès la première seconde.</p>
+        <ul class="tags"><li>Three.js</li><li>WebGL</li><li>Interactif</li></ul>
+      </article>
+      <article class="card tilt reveal">
+        <div class="card__icon">▣</div>
+        <h3>Applications web</h3>
+        <p>Dashboards, réservations, espaces clients, outils métiers : des applications fiables et évolutives.</p>
+        <ul class="tags"><li>API</li><li>Base de données</li><li>Auth</li></ul>
+      </article>
+      <article class="card tilt reveal">
+        <div class="card__icon">◧</div>
+        <h3>Mobile first</h3>
+        <p>Chaque site est pensé d'abord pour le téléphone, puis sublimé sur tablette et ordinateur.</p>
+        <ul class="tags"><li>PWA</li><li>Responsive</li><li>Tactile</li></ul>
+      </article>
+      <article class="card tilt reveal">
+        <div class="card__icon">✦</div>
+        <h3>Refonte & optimisation</h3>
+        <p>Votre site est lent ou dépassé ? Je le modernise, l'accélère et améliore son référencement.</p>
+        <ul class="tags"><li>Perf</li><li>UX/UI</li><li>Analytics</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section class="section" id="projets" data-section="2">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <p class="eyebrow">02 — Projets</p>
+      <h2>Réalisations <span class="grad">sélectionnées</span></h2>
+      <p class="muted">Quelques exemples de sites pour différents secteurs. Remplacez-les par vos vrais projets.</p>
+    </header>
+    <div class="projects">
+      <a href="#contact" class="project tilt reveal" style="--a:#ff7a59;--b:#ffc371">
+        <div class="project__shot"><div class="win"><i></i><i></i><i></i><div class="win__body"><b></b><b></b><b></b></div></div></div>
+        <div class="project__meta"><span>Restaurant</span><h3>Maison Dorée</h3><p>Site vitrine + réservation en ligne</p></div>
+      </a>
+      <a href="#contact" class="project tilt reveal" style="--a:#6ee7ff;--b:#3b82f6">
+        <div class="project__shot"><div class="win"><i></i><i></i><i></i><div class="win__body"><b></b><b></b><b></b></div></div></div>
+        <div class="project__meta"><span>E-commerce</span><h3>Urban Kicks</h3><p>Boutique de sneakers avec viewer 3D</p></div>
+      </a>
+      <a href="#contact" class="project tilt reveal" style="--a:#a855f7;--b:#ec4899">
+        <div class="project__shot"><div class="win"><i></i><i></i><i></i><div class="win__body"><b></b><b></b><b></b></div></div></div>
+        <div class="project__meta"><span>Startup SaaS</span><h3>Nova Analytics</h3><p>Landing page animée + dashboard</p></div>
+      </a>
+      <a href="#contact" class="project tilt reveal" style="--a:#34d399;--b:#10b981">
+        <div class="project__shot"><div class="win"><i></i><i></i><i></i><div class="win__body"><b></b><b></b><b></b></div></div></div>
+        <div class="project__meta"><span>Immobilier</span><h3>Habitat Prime</h3><p>Catalogue de biens + visites 3D</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETENCES -->
+<section class="section" id="competences" data-section="3">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <p class="eyebrow">03 — Compétences</p>
+      <h2>Une <span class="grad">boîte à outils</span> complète</h2>
+      <p class="muted">Du design à la mise en ligne, je maîtrise toute la chaîne.</p>
+    </header>
+    <div class="skills">
+      <div class="skillbar reveal"><div class="skillbar__top"><span>HTML / CSS / JavaScript</span><b>95%</b></div><div class="bar"><i style="--w:95%"></i></div></div>
+      <div class="skillbar reveal"><div class="skillbar__top"><span>Three.js / WebGL / Animations 3D</span><b>90%</b></div><div class="bar"><i style="--w:90%"></i></div></div>
+      <div class="skillbar reveal"><div class="skillbar__top"><span>React / Next.js / Vue</span><b>88%</b></div><div class="bar"><i style="--w:88%"></i></div></div>
+      <div class="skillbar reveal"><div class="skillbar__top"><span>Node.js / API / Bases de données</span><b>85%</b></div><div class="bar"><i style="--w:85%"></i></div></div>
+      <div class="skillbar reveal"><div class="skillbar__top"><span>UI / UX Design & Figma</span><b>85%</b></div><div class="bar"><i style="--w:85%"></i></div></div>
+      <div class="skillbar reveal"><div class="skillbar__top"><span>SEO & Performance</span><b>92%</b></div><div class="bar"><i style="--w:92%"></i></div></div>
+    </div>
+    <ul class="chips reveal">
+      <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>TypeScript</li><li>React</li><li>Next.js</li><li>Vue</li><li>Three.js</li><li>GSAP</li><li>Tailwind</li><li>Node.js</li><li>Supabase</li><li>PostgreSQL</li><li>WordPress</li><li>Shopify</li><li>Figma</li><li>Git</li><li>Vercel</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process" data-section="4">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <p class="eyebrow">04 — Méthode</p>
+      <h2>Du brief à la <span class="grad">mise en ligne</span></h2>
+    </header>
+    <ol class="steps">
+      <li class="step reveal"><span class="step__n">01</span><h3>Découverte</h3><p>J'écoute votre activité, vos objectifs et votre clientèle.</p></li>
+      <li class="step reveal"><span class="step__n">02</span><h3>Design</h3><p>Maquettes et identité visuelle validées avec vous.</p></li>
+      <li class="step reveal"><span class="step__n">03</span><h3>Développement</h3><p>Code propre, animations 3D, responsive, optimisé.</p></li>
+      <li class="step reveal"><span class="step__n">04</span><h3>Lancement</h3><p>Mise en ligne, formation et suivi après livraison.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contact" data-section="5">
+  <div class="wrap contact__inner">
+    <header class="section__head reveal">
+      <p class="eyebrow">05 — Contact</p>
+      <h2>Et si on <span class="grad">construisait</span> votre site ?</h2>
+      <p class="muted">Décrivez votre projet, je vous réponds sous 24h avec une proposition.</p>
+      <ul class="contact__links">
+        <li><a href="mailto:contact@votre-site.com">✉ contact@votre-site.com</a></li>
+        <li><a href="https://wa.me/00000000000" target="_blank" rel="noopener">☏ WhatsApp</a></li>
+      </ul>
+    </header>
+    <form class="form reveal" id="form" novalidate>
+      <label><span>Nom</span><input name="name" required autocomplete="name" placeholder="Votre nom"></label>
+      <label><span>Email</span><input name="email" type="email" required autocomplete="email" placeholder="vous@exemple.com"></label>
+      <label><span>Type de projet</span>
+        <select name="type">
+          <option>Site vitrine</option><option>E-commerce</option><option>Expérience 3D</option><option>Application web</option><option>Refonte</option><option>Autre</option>
+        </select>
+      </label>
+      <label><span>Message</span><textarea name="msg" rows="4" required placeholder="Parlez-moi de votre business…"></textarea></label>
+      <button class="btn btn--primary magnetic" type="submit">Envoyer le message <span class="arrow">→</span></button>
+      <p class="form__status" id="formStatus" role="status"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>© <span id="year"></span> Votre Nom — Fait avec ♥ et beaucoup de 3D.</p>
+    <a href="#accueil">Retour en haut ↑</a>
+  </div>
+</footer>
+
+<script src="vendor/three.min.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
